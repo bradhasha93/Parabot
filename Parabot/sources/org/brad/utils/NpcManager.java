@@ -1,4 +1,4 @@
-package utils;
+package org.brad.utils;
 
 import org.parabot.environment.api.utils.Filter;
 import org.rev317.api.methods.Camera;

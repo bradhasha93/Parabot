@@ -1,12 +1,20 @@
 package BrAltarPro;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 
+import org.brad.randoms.MysteriousOldMan;
+import org.brad.randoms.SandwichLady;
+import org.brad.utils.BankManager;
+import org.brad.utils.ItemManager;
+import org.brad.utils.Methods;
+import org.brad.utils.Teleports;
 import org.parabot.environment.api.interfaces.Paintable;
 import org.parabot.environment.api.utils.Random;
 import org.parabot.environment.input.Mouse;
@@ -25,19 +33,12 @@ import org.rev317.api.methods.Skill;
 import org.rev317.api.wrappers.scene.SceneObject;
 import org.rev317.api.wrappers.scene.Tile;
 
-import randoms.MysteriousOldMan;
-import randoms.SandwichLady;
-import utils.BankManager;
-import utils.ItemManager;
-import utils.Methods;
-import utils.Teleports;
-
 @ScriptManifest(author = "Bradsta", category = Category.PRAYER, description = "Uses bones on altar!", name = "BrAltarPro", servers = { "PkHonor" }, version = 1.000)
 public class BrAltarPro extends Script implements LoopTask, Paintable {
 
 	private final ArrayList<Strategy> tasks = new ArrayList<>();
 
-	private final Tile BANK_TILE = new Tile(3093,3491);
+	private final Tile EDGE_BANK_TILE = new Tile(3093,3491);
 	private final int DRAGON_BONES = 536;
 
 	private int startLvl = 0;
@@ -114,8 +115,8 @@ public class BrAltarPro extends Script implements LoopTask, Paintable {
 	private void bank() {
 		if (BankManager.isBankOpen()) {
 			Bank.withdraw(DRAGON_BONES, 29);
-		} else if (Calculations.distanceTo(BANK_TILE) > 5) {
-			Mouse.getInstance().click(Calculations.tileToMinimap(BANK_TILE, true), true);
+		} else if (Calculations.distanceTo(EDGE_BANK_TILE) > 5) {
+			Mouse.getInstance().click(Calculations.tileToMinimap(EDGE_BANK_TILE, true), true);
 		} else if (BankManager.openBank(false)) {
 			sleep(new SleepCondition() {
 
@@ -146,7 +147,22 @@ public class BrAltarPro extends Script implements LoopTask, Paintable {
 		}
 		return 250;
 	}
+	
+	
+	// Paint vars
 
+	private final Color COLOR_1 = new Color(11, 1, 1, 173);
+	private final Color COLOR_2 = new Color(0, 0, 0, 114);
+	private final Color COLOR_3 = new Color(249, 245, 245);
+	private final Color COLOR_4 = new Color(255, 241, 241);
+	private final Color COLOR_5 = new Color(13, 231, 30);
+	private final Color COLOR_6 = new Color(255, 255, 255);
+	
+	private final BasicStroke STROKE_1 = new BasicStroke(1);
+	
+	private final Font FONT_1 = new Font("Arial", 1, 12);
+	private final Font FONT_2 = new Font("Arial", 1, 10);
+	
 	@Override
 	public void paint(Graphics g1) {
 		Graphics2D g = (Graphics2D) g1;
@@ -154,15 +170,29 @@ public class BrAltarPro extends Script implements LoopTask, Paintable {
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		Methods.plusMouse(g, Color.RED, new Point(BotMouse.getMouseX(),
 				BotMouse.getMouseY()));
-		g.drawString("Prayer Lvl: " + startLvl + " (+"
-				+ (skill.getRealLevel() - startLvl) + ")", 276, 356);
-		g.drawString(
-				"Prayer Xp/Hr: "
-						+ (skill.getExperience() - startXp)
-						+ " / "
-						+ Methods.perHour((skill.getExperience() - startXp),
-								startTime), 276, 370);
-		g.drawString("Runtime: "+Methods.getTimeRunning(startTime), 276, 384);
+	        g.setColor(COLOR_1);
+	        g.fillRect(548, 337, 188, 124);
+	        g.setColor(COLOR_2);
+	        g.setStroke(STROKE_1);
+	        g.drawRect(548, 337, 188, 124);
+	        g.setColor(COLOR_3);       
+	        g.setColor(COLOR_4);
+	        g.drawLine(548, 354, 737, 354);
+	        g.setFont(FONT_1);
+	        g.setColor(COLOR_5);
+	        g.drawString("BrAltarPro v1.000 by Bradsta", 551, 350);
+	        g.setFont(FONT_2);
+	        g.setColor(COLOR_6);
+	        g.drawString("Status: Setting up..", 551, 367);
+	        g.drawString("Runtime: "+Methods.getTimeRunning(startTime), 551, 455);
+	        g.drawString("Prayer Lvl: "+ startLvl + " (+"
+					+ (skill.getRealLevel() - startLvl) + ")", 551, 394);
+	        g.drawString("Prayer Xp/Hr: "+ (skill.getExperience() - startXp)
+					+ " / "
+					+ Methods.perHour((skill.getExperience() - startXp),
+							startTime), 550, 406);
+	        g.drawString("Bone Type: Dragon bones", 550, 419);
+	        g.drawString("Bones Used/Hr: 210 / 2,232", 550, 431);
 	}
 
 }

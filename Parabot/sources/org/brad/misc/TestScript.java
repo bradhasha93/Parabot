@@ -1,9 +1,10 @@
-package misc;
+package org.brad.misc;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import org.brad.utils.Teleports;
 import org.parabot.core.ui.components.LogArea;
 import org.parabot.environment.api.interfaces.Paintable;
 import org.parabot.environment.api.utils.Random;
@@ -14,8 +15,6 @@ import org.parabot.environment.scripts.framework.SleepCondition;
 import org.parabot.environment.scripts.framework.Strategy;
 import org.rev317.api.methods.Interfaces;
 import org.rev317.api.wrappers.hud.Interface;
-
-import utils.Teleports;
 
 @ScriptManifest(author = "Bradsta", category = Category.MAGIC, description = "Alches items", name = "SimpleAlcher", servers = { "PkHonor" }, version = 1.000)
 public class TestScript extends Script implements Paintable {

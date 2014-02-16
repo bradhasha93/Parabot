@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
 
+import org.brad.utils.Methods;
 import org.parabot.environment.api.interfaces.Paintable;
 import org.parabot.environment.api.utils.Random;
 import org.parabot.environment.api.utils.Time;
@@ -24,7 +25,6 @@ import org.rev317.api.methods.SceneObjects;
 import org.rev317.api.wrappers.interactive.Npc;
 import org.rev317.api.wrappers.scene.SceneObject;
 
-import utils.Methods;
 import BrAutoFighter.Vars;
 
 @ScriptManifest(author = "Bradsta", category = Category.MINING, description = "Mines rocks to get out of jail!", name = "BrJailMiner", servers = { "PkHonor" }, version = 1.000)

@@ -1,4 +1,4 @@
-package utils;
+package org.brad.utils;
 
 import org.parabot.environment.input.Mouse;
 import org.rev317.api.methods.Calculations;

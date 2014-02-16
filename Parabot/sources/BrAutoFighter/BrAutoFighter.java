@@ -8,6 +8,13 @@ import java.awt.RenderingHints;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import org.brad.utils.BankManager;
+import org.brad.utils.ItemManager;
+import org.brad.utils.Looting;
+import org.brad.utils.Methods;
+import org.brad.utils.NpcManager;
+import org.brad.utils.Teleports;
+import org.brad.utils.Teleports.CombatTeleport;
 import org.parabot.core.ui.components.LogArea;
 import org.parabot.environment.api.interfaces.Paintable;
 import org.parabot.environment.api.utils.Random;
@@ -27,14 +34,6 @@ import org.rev317.api.methods.Players;
 import org.rev317.api.methods.Skill;
 import org.rev317.api.wrappers.scene.GroundItem;
 import org.rev317.api.wrappers.scene.Tile;
-
-import utils.BankManager;
-import utils.ItemManager;
-import utils.Looting;
-import utils.Methods;
-import utils.NpcManager;
-import utils.Teleports;
-import utils.Teleports.CombatTeleport;
 
 @ScriptManifest(author = "Bradsta", category = Category.COMBAT, description = "Fights and loots!", name = "BrAutoFighter", servers = { "PkHonor" }, version = 1.00)
 public class BrAutoFighter extends Script implements Paintable, LoopTask,

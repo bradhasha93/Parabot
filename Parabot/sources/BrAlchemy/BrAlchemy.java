@@ -7,6 +7,11 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 
+import org.brad.randoms.MysteriousOldMan;
+import org.brad.randoms.SandwichLady;
+import org.brad.utils.ItemManager;
+import org.brad.utils.Methods;
+import org.brad.utils.Teleports;
 import org.parabot.environment.api.interfaces.Paintable;
 import org.parabot.environment.api.utils.Random;
 import org.parabot.environment.scripts.Category;
@@ -19,12 +24,6 @@ import org.rev317.api.methods.Magic;
 import org.rev317.api.methods.Players;
 import org.rev317.api.methods.Magic.StandardMagic377;
 import org.rev317.api.wrappers.hud.Item;
-
-import randoms.MysteriousOldMan;
-import randoms.SandwichLady;
-import utils.ItemManager;
-import utils.Methods;
-import utils.Teleports;
 
 @ScriptManifest(author = "Bradsta", category = Category.MAGIC, description = "Alches items!", name = "BrAlchemy", servers = { "PkHonor" }, version = 1.000)
 public class BrAlchemy extends Script implements LoopTask, Paintable {

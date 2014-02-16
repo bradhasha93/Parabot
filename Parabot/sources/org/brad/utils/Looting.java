@@ -1,4 +1,4 @@
-package utils;
+package org.brad.utils;
 
 import java.util.Collection;
 import java.util.HashMap;

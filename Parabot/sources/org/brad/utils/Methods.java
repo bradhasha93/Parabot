@@ -1,4 +1,4 @@
-package utils;
+package org.brad.utils;
 
 import java.awt.Color;
 import java.awt.Graphics;

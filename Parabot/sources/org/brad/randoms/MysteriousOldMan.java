@@ -1,4 +1,4 @@
-package randoms;
+package org.brad.randoms;
 
 import org.parabot.core.ui.components.LogArea;
 import org.parabot.environment.api.utils.Time;
@@ -7,24 +7,24 @@ import org.rev317.api.methods.Game;
 import org.rev317.api.methods.Npcs;
 import org.rev317.api.wrappers.interactive.Npc;
 
-public class SandwichLady implements Strategy {
+public class MysteriousOldMan implements Strategy {
 
 	@Override
 	public boolean activate() {
-		final Npc[] SANDWICH_LADY = Npcs.getNearest("Sandwich Lady");
-		return SANDWICH_LADY.length > 0;
+		final Npc[] man = Npcs.getNearest("Mysterious Old Man");
+		return man.length > 0;
 	}
 
 	@Override
 	public void execute() {
-		final Npc[] SANDWICH_LADY = Npcs.getNearest("Sandwich Lady");
-		if (SANDWICH_LADY.length > 0) {
-			final String text = SANDWICH_LADY[0].getDisplayedText();
+		final Npc[] man = Npcs.getNearest("Mysterious Old Man");
+		if (man.length > 0) {
+			final String text = man[0].getDisplayedText();
 			if (text != null) {
 				if (text.contains(Game.getUsername())) {
-					if (SANDWICH_LADY[0].interact("Talk-to")) {
-						LogArea.log("Solved Sandwich Lady random!");
-						Time.sleep(2500,3000);
+					if (man[0].interact("Talk-to")) {
+						LogArea.log("Solved Mysterious Old Man random!");
+						Time.sleep(2000, 3000);
 					}
 				}
 			}
