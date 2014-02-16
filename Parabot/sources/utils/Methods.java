@@ -18,27 +18,6 @@ import org.rev317.api.wrappers.scene.SceneObject;
 
 public class Methods {
 
-	static Mouse mouse = Mouse.getInstance();
-
-	public static Item getItem(int... ids) {
-		final Item[] items = Inventory.getItems(ids);
-		return items.length > 0 ? items[0] : null;
-	}
-
-	public static boolean hasItem(int... ids) {
-		return Inventory.getItems(ids).length > 0;
-	}
-
-	public static void interactWithItem(final Item item, final String action) {
-		if (Tab.INVENTORY.isOpen()) {
-		if (item != null)
-			item.interact(action);
-		} else {
-			Keyboard.getInstance().pressKey(KeyEvent.VK_F1);
-			Keyboard.getInstance().releaseKey(KeyEvent.VK_F1);
-		}
-	}
-
 	public static boolean inCombat() {
 		return Players.getLocal().getInteractingCharacter() != 0;
 	}

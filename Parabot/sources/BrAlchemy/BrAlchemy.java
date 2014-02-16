@@ -22,12 +22,14 @@ import org.rev317.api.wrappers.hud.Item;
 
 import randoms.MysteriousOldMan;
 import randoms.SandwichLady;
+import utils.ItemManager;
 import utils.Methods;
 import utils.Teleports;
 
 @ScriptManifest(author = "Bradsta", category = Category.MAGIC, description = "Alches items!", name = "BrAlchemy", servers = { "PkHonor" }, version = 1.000)
 public class BrAlchemy extends Script implements LoopTask, Paintable {
 
+	// Stores script tasks, only using for randoms.
 	private final ArrayList<Strategy> tasks = new ArrayList<>();
 
 	@Override
@@ -38,17 +40,48 @@ public class BrAlchemy extends Script implements LoopTask, Paintable {
 		return true;
 	}
 
-	@Override
-	public int loop() {
+	// Script states
+	private enum State {
+		ACTIVE_RANDOM, CAST_SPELL;
+	}
+
+	/**
+	 * Returns script state based on conditions
+	 * 
+	 * @return Script state
+	 */
+	private State getState() {
 		if (tasks.get(0).activate() || tasks.get(1).activate()) {
-			sleep(Random.between(1000, 1500));
-		} else if (Teleports.openMagicTab()) {
-			final Item item = Methods.getItem(557);
+			return State.ACTIVE_RANDOM;
+		}
+		return State.CAST_SPELL;
+	}
+
+	/**
+	 * Attempts to cast the spell
+	 */
+	private void castSpell() {
+		if (Teleports.openMagicTab()) {
+			final Item item = ItemManager.getItem(557);
 			if (item != null) {
 				Magic.castSpell(StandardMagic377.CHARGE_WATER_ORB, item);
 				if (Players.getLocal().getAnimation() != -1)
 					sleep(Random.between(700, 850));
 			}
+		}
+	}
+
+	@Override
+	public int loop() {
+		switch (getState()) {
+		case ACTIVE_RANDOM:
+			sleep(Random.between(1500, 2000));
+			break;
+		case CAST_SPELL:
+			castSpell();
+			break;
+		default:
+			break;
 		}
 		return 200;
 	}

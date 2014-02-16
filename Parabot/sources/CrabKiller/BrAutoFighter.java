@@ -7,12 +7,10 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.parabot.core.ui.components.LogArea;
 import org.parabot.environment.api.interfaces.Paintable;
 import org.parabot.environment.api.utils.Random;
-import org.parabot.environment.api.utils.Time;
 import org.parabot.environment.scripts.Category;
 import org.parabot.environment.scripts.Script;
 import org.parabot.environment.scripts.ScriptManifest;
@@ -31,6 +29,7 @@ import org.rev317.api.wrappers.scene.GroundItem;
 import org.rev317.api.wrappers.scene.Tile;
 
 import utils.BankManager;
+import utils.ItemManager;
 import utils.Looting;
 import utils.Methods;
 import utils.NpcManager;
@@ -87,7 +86,7 @@ public class BrAutoFighter extends Script implements Paintable, LoopTask,
 	 * @return Bot state
 	 */
 	private State getState() {
-		if (Methods.hasItem(foodIds)) {
+		if (ItemManager.hasItem(foodIds)) {
 			if (BankManager.isBankOpen()) {
 				Bank.close();
 				return State.WAIT;
@@ -96,7 +95,7 @@ public class BrAutoFighter extends Script implements Paintable, LoopTask,
 				if (Skill.HITPOINTS.getLevel() < 15) {
 					return State.EAT;
 				} else if (Skill.PRAYER.getLevel() < 25
-						&& Methods.hasItem(prayerPots)) {
+						&& ItemManager.hasItem(prayerPots)) {
 					return State.DRINK_PRAYER_POT;
 				} else if (Methods.inCombat()) {
 					return State.WAIT;
@@ -117,8 +116,8 @@ public class BrAutoFighter extends Script implements Paintable, LoopTask,
 	 * Attempts to eat food
 	 */
 	private void eat() {
-		if (Methods.hasItem(foodIds))
-			Methods.interactWithItem(Methods.getItem(foodIds), "Eat");
+		if (ItemManager.hasItem(foodIds))
+			ItemManager.interactWithItem(ItemManager.getItem(foodIds), "Eat");
 	}
 
 	/**
@@ -144,8 +143,8 @@ public class BrAutoFighter extends Script implements Paintable, LoopTask,
 		final int id = loot.getId();
 		final int start = Inventory.getCount(true, id);
 
-		if (Inventory.isFull() && Methods.hasItem(foodIds))
-			Methods.interactWithItem(Methods.getItem(foodIds), "Eat");
+		if (Inventory.isFull() && ItemManager.hasItem(foodIds))
+			ItemManager.interactWithItem(ItemManager.getItem(foodIds), "Eat");
 
 		if (Looting.takeLoot(loot)) {
 
@@ -235,11 +234,11 @@ public class BrAutoFighter extends Script implements Paintable, LoopTask,
 				loot();
 				break;
 			case DRINK_PRAYER_POT:
-				Methods.interactWithItem(Methods.getItem(prayerPots), "Drink");
+				ItemManager.interactWithItem(ItemManager.getItem(prayerPots), "Drink");
 				sleep(Random.between(700, 800));
 			case WAIT:
-				if (Methods.hasItem(229))
-					Methods.interactWithItem(Methods.getItem(229), "Drop");
+				if (ItemManager.hasItem(229))
+					ItemManager.interactWithItem(ItemManager.getItem(229), "Drop");
 				break;
 			case TELEPORT:
 				teleport();
@@ -260,8 +259,8 @@ public class BrAutoFighter extends Script implements Paintable, LoopTask,
 	@Override
 	public void messageReceived(MessageEvent arg0) {
 		if (arg0.getMessage().contains("normal again.")) {
-			if (Methods.hasItem(overloadPotions))
-				Methods.interactWithItem(Methods.getItem(overloadPotions),
+			if (ItemManager.hasItem(overloadPotions))
+				ItemManager.interactWithItem(ItemManager.getItem(overloadPotions),
 						"Drink");
 		}
 

@@ -28,6 +28,7 @@ import org.rev317.api.wrappers.scene.Tile;
 import randoms.MysteriousOldMan;
 import randoms.SandwichLady;
 import utils.BankManager;
+import utils.ItemManager;
 import utils.Methods;
 import utils.Teleports;
 
@@ -65,7 +66,7 @@ public class BrAltarPro extends Script implements LoopTask, Paintable {
 
 	private State getState() {
 
-		if (Methods.hasItem(DRAGON_BONES)) {
+		if (ItemManager.hasItem(DRAGON_BONES)) {
 			if (BankManager.isBankOpen()) {
 				Bank.close();
 			}
@@ -85,7 +86,7 @@ public class BrAltarPro extends Script implements LoopTask, Paintable {
 			if (!altar.isOnScreen())
 				Camera.turnTo(altar);
 			if (!Teleports.isCombatTeleportsOpen()) {
-				Methods.interactWithItem(Methods.getItem(DRAGON_BONES), "Use");
+				ItemManager.interactWithItem(ItemManager.getItem(DRAGON_BONES), "Use");
 				if (altar.interact("Use Dragon Bones -> Altar")) {
 					sleep(new SleepCondition() {
 
@@ -98,7 +99,7 @@ public class BrAltarPro extends Script implements LoopTask, Paintable {
 			} else {
 				if (Teleports.isCombatTeleportsOpen()) {
 					if (Teleports.CombatTeleport.NEVER_MIND.teleport())
-						for (int i = 0; i < 20 && Methods.hasItem(DRAGON_BONES); i++) {
+						for (int i = 0; i < 20 && ItemManager.hasItem(DRAGON_BONES); i++) {
 							final int count = Inventory.getCount(DRAGON_BONES);
 							sleep(Random.between(2000, 3000));
 							if (Inventory.getCount(DRAGON_BONES) == count)
