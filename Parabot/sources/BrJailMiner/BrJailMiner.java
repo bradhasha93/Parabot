@@ -25,7 +25,7 @@ import org.rev317.api.wrappers.interactive.Npc;
 import org.rev317.api.wrappers.scene.SceneObject;
 
 import utils.Methods;
-import CrabKiller.Vars;
+import BrAutoFighter.Vars;
 
 @ScriptManifest(author = "Bradsta", category = Category.MINING, description = "Mines rocks to get out of jail!", name = "BrJailMiner", servers = { "PkHonor" }, version = 1.000)
 public class BrJailMiner extends Script implements LoopTask, Paintable {
