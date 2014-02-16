@@ -66,7 +66,6 @@ public class Teleports {
 			final Point botMouse = new Point(BotMouse.getMouseX(),
 					BotMouse.getMouseY());
 			if (this.AREA.contains(botMouse)) {
-				LogArea.log("in area");
 				mouse.click(botMouse, true);
 				return true;
 			} else {

@@ -94,7 +94,7 @@ public class UI extends JFrame {
 				BrAltarPro.bones = Bones.values()[boneBox.getSelectedIndex()];
 				BrAltarPro.useEdge = rdbtnEdgeville.isSelected();
 
-				LogArea.log("Bone type: " + bones + " Location: "
+				LogArea.log("Bone type: " + BrAltarPro.bones.getName() + " Location: "
 						+ (BrAltarPro.useEdge ? "Edgeville" : "Premium Zone"));
 				
 				BrAltarPro.startScript = true;
