@@ -118,7 +118,7 @@ public class BrAltarPro extends Script implements LoopTask, Paintable {
 				ItemManager.interactWithItem(
 						ItemManager.getItem(bones.getId()), "Use");
 				Status = "Attempting to use altar..";
-				if (altar.interact("Use "+bones.getName()+" -> Altar")) {
+				if (altar.interact("Use " + bones.getName() + " -> Altar")) {
 					sleep(new SleepCondition() {
 
 						@Override
@@ -150,8 +150,15 @@ public class BrAltarPro extends Script implements LoopTask, Paintable {
 		if (BankManager.isBankOpen()) {
 			Status = "Banking..";
 			if (!ItemManager.hasItem(bones.getId())) {
+				final int count = Inventory.getCount(true, bones.getId());
 				if (BankManager.withdraw(bones.getId(), 0))
-					Bank.close();
+					sleep(new SleepCondition() {
+
+						@Override
+						public boolean isValid() {
+							return Inventory.getCount(true, bones.getId()) > count;
+						}
+					}, Random.between(2500, 3000));
 			}
 
 		} else if (Calculations.distanceTo(EDGE_BANK_TILE) > 5 && useEdge) {
@@ -232,13 +239,13 @@ public class BrAltarPro extends Script implements LoopTask, Paintable {
 				+ (skill.getRealLevel() - startLvl) + ")", 551, 394);
 		final int gained = (skill.getExperience() - startXp);
 		g.drawString("Prayer Xp/Hr: " + Methods.formatNumber(gained) + " / "
-				+ Methods.perHour(gained, startTime), 550, 406);
+				+ Methods.perHour(gained, startTime), 551, 406);
 		g.drawString("Bone Type: " + (bones != null ? bones.getName() : ""),
-				550, 419);
+				551, 419);
 		final int used = gained != 0 && bones != null ? gained / bones.getXp()
 				: 0;
 		g.drawString("Bones Used/Hr: " + Methods.formatNumber(used) + " / "
-				+ Methods.perHour(used, startTime), 550, 431);
+				+ Methods.perHour(used, startTime), 551, 431);
 	}
 
 }

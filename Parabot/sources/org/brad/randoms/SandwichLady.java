@@ -19,14 +19,9 @@ public class SandwichLady implements Strategy {
 	public void execute() {
 		final Npc[] SANDWICH_LADY = Npcs.getNearest("Sandwich Lady");
 		if (SANDWICH_LADY.length > 0) {
-			final String text = SANDWICH_LADY[0].getDisplayedText();
-			if (text != null) {
-				if (text.contains(Game.getUsername())) {
-					if (SANDWICH_LADY[0].interact("Talk-to")) {
-						LogArea.log("Solved Sandwich Lady random!");
-						Time.sleep(2500,3000);
-					}
-				}
+			if (SANDWICH_LADY[0].interact("Talk-to")) {
+				LogArea.log("Solved Sandwich Lady random!");
+				Time.sleep(2500, 3000);
 			}
 		}
 	}

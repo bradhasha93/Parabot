@@ -1,8 +1,11 @@
 package org.brad.utils;
 
+import org.parabot.environment.api.utils.Random;
 import org.parabot.environment.api.utils.Time;
 import org.parabot.environment.input.Keyboard;
 import org.parabot.environment.input.Mouse;
+import org.parabot.environment.scripts.Script;
+import org.parabot.environment.scripts.framework.SleepCondition;
 import org.rev317.api.methods.Bank;
 import org.rev317.api.methods.Calculations;
 import org.rev317.api.methods.Camera;
@@ -42,13 +45,13 @@ public class BankManager {
 
 	/**
 	 * Attempts to withdraw an item from the bank
+	 * 
 	 * @param id
 	 * @param amnt
 	 * @return true if ending count > start count
 	 */
 	public static boolean withdraw(final int id, final int amnt) {
 		final Item item = Bank.getItem(id);
-		final int count = Inventory.getCount(true, id);
 		if (item != null) {
 			switch (amnt) {
 			case 1:
@@ -64,13 +67,20 @@ public class BankManager {
 							&& Interfaces.getChatboxInterfaceId() != 1; i++) {
 						Time.sleep(250);
 					}
+					Time.sleep(1350, 1500);
 					Keyboard.getInstance().sendKeys("" + amnt);
 				} else {
 					item.interact("Withdraw All");
 				}
 			}
+			return true;
 		}
-		return Inventory.getCount(true, id) > count;
+		return false;
+	}
+
+	public static void depositAll(final Item item) {
+		if (item != null)
+			item.interact("Store All");
 	}
 
 	/**
